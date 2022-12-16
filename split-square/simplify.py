@@ -49,6 +49,17 @@ Be careful that we don't "simplify" a set of matching mixed squares:
 
 def simplify(s):
     """Simplify a split square:"""
+    if s == 0 or s == 1:
+        return s
+
+    if isinstance(s, list) and len(s)==4 and not isinstance(s[0],int) and all(s):
+        return 1
+    
+    for value in s:
+        value = simplify(value)
+
+    return s
+    
 
 
 if __name__ == "__main__":

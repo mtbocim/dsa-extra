@@ -3,51 +3,44 @@
 A simple square will only be one line::
 
     >>> dump(0)
-    0
+    '0'
 
     >>> dump(1)
-    1
+    '1'
 
 A split square will use four lines::
 
     >>> dump([0, 1, 0, 1])
-    0
-    1
-    0
-    1
+    '0 1 0 1'
 
 A nested split square will use one line per square::
 
     >>> dump([0, 0, 0, [1, 1, 1, 1]])
-    0
-    0
-    0
-    1
-    1
-    1
-    1
+    '0 0 0 1 1 1 1'
 
 Of course, these can nested deeply and still work::
 
     >>> dump([0, 0, 0, [1, 1, 1, [0, 0, 0, [1, 1, 1, 1]]]])
-    0
-    0
-    0
-    1
-    1
-    1
-    0
-    0
-    0
-    1
-    1
-    1
-    1
+    '0 0 0 1 1 1 0 0 0 1 1 1 1'
 """
 
 
 def dump(s):
     """Print each square on a new line."""
+    # print("what is s>>>>>>>>",s)
+    if s==0 or s==1:
+        return str(s)
+    
+    output = ''
+    for value in s:
+        if isinstance(value, list):
+            output = f'{output} {dump(value)}'
+        else:
+            if len(output) == 0:
+                output = str(value)
+            else:
+                output = f'{output} {str(value)}'
+    return output
 
 
 if __name__ == "__main__":
