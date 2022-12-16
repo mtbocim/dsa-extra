@@ -52,14 +52,14 @@ def simplify(s):
     if s == 0 or s == 1:
         return s
 
-    if isinstance(s, list) and len(s)==4 and not isinstance(s[0],int) and all(s):
-        return 1
-    
-    for value in s:
-        value = simplify(value)
+    for i in range(len(s)):
+        s[i] = simplify(s[i])
+
+    if isinstance(s[0], int) and all(val == s[0] for val in s):
+        return s[0]
 
     return s
-    
+
 
 
 if __name__ == "__main__":
